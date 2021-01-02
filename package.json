@@ -21,6 +21,8 @@
     "@angular/router": "~10.1.2",
     "@microsoft/signalr": "^3.1.8",
     "@microsoft/signalr-protocol-msgpack": "^3.1.8",
+    "bryntum-resources": "file:../bryntum/_shared",
+    "bryntum-scheduler": "file:../bryntum/build",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

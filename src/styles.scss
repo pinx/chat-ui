@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import "scheduler.material.css";
+
+@font-face {
+  font-family: Lato;
+  src: url('fonts/lato/Lato-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('fonts/lato/Lato-Italic.woff2') format('woff2'), /* Super Modern Browsers */
+  url('fonts/lato/Lato-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+  url('fonts/lato/Lato-Italic.woff') format('woff'); /* Pretty Modern Browsers */
+  font-weight: 400;
+}

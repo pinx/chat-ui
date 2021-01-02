@@ -6,10 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component'
 import { ScheduleComponent } from './schedule/schedule.component';
+import {SchedulerComponent} from "./scheduler/scheduler.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    SchedulerComponent,
     ChatComponent,
     ScheduleComponent
   ],
