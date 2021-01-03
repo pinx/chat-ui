@@ -1,5 +1,13 @@
-<bry-scheduler>
+<bry-scheduler
   #scheduler
   [columns]           = "schedulerConfig.columns"
+  [crudManager]       = "schedulerConfig.crudManager"
+  [eventColor]        = "schedulerConfig.eventColor"
+  [minHeight]         = "schedulerConfig.minHeight"
+  [rowHeight]         = "schedulerConfig.rowHeight"
+  [startDate]         = "schedulerConfig.startDate"
+  [endDate]           = "schedulerConfig.endDate"
+  [timeRangesFeature] = "schedulerConfig.timeRangesFeature"
   [viewPreset]        = "schedulerConfig.viewPreset"
-</bry-scheduler>
+  (onSchedulerEvents) = "handleEvent($event)"
+></bry-scheduler>
