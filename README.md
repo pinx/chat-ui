@@ -1,27 +1,18 @@
-# ChatUi
+# Live multi-user schedule board
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
+This proof-of-concept started out with a clone of [Javier's chat UI](https://github.com/javiergacrich/chat-ui).
 
-## Development server
+Then I introduced Bryntum's scheduler component, picking bits and pieces from their [examples](https://www.bryntum.com/examples/scheduler/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Events emitted by the scheduler component are turned into SignalR messages to the [hub](https://docs.microsoft.com/en-us/aspnet/core/signalr/hubs).
 
-## Code scaffolding
+Received messages are used to update events in the scheduler.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The code is still a bit hacky. I found [a nice post](https://gist.github.com/jehugaleahsa/825518ee860b84d3a041c17ccf095f61) on how to structure an app like this, using Angular services and Observables as they are intended.
 
-## Build
+When opening two browser windows to the app, the UX is as follows:
+- When starting to drag, the event in the other window changes color
+- When dropping the event, the event in the other window moves to the new time
+- Moving to different resources is not supported
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Super simple, but just to demonstrate the event flow from one UI to the server and back to other UIs.
