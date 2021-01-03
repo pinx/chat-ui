@@ -431,6 +431,21 @@ export class SchedulerComponent implements OnInit, OnChanges, OnDestroy {
         scheduler.editEvent(event);
     }
 
+  lockEvent(id: number) {
+    const event: EventModel = <EventModel>this.schedulerInstance.eventStore.getById(id)
+    if (event != null) {
+      event.eventColor = "black"
+    }
+  }
+
+  updateEvent(id: number, startDate: Date) {
+      const event: EventModel = <EventModel>this.schedulerInstance.eventStore.getById(id)
+      if (event != null) {
+        event.startDate = startDate
+        event.eventColor = "orange"
+      }
+    }
+
     /**
      * Destroys component
      */

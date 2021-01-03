@@ -1,11 +1,11 @@
 import {HttpClient} from '@angular/common/http';
 import {EventEmitter, Injectable} from '@angular/core';
-import {HubConnection, HubConnectionBuilder, JsonHubProtocol, LogLevel} from '@microsoft/signalr'
-import {from, Observable} from 'rxjs';
+import {HubConnection, HubConnectionBuilder} from '@microsoft/signalr'
+import {from} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ChatMessage} from './chatMessage';
 import {MessagePackHubProtocol} from '@microsoft/signalr-protocol-msgpack'
-import {UpdateMessage} from "./updateMessage";
+import {EventType, UpdateMessage} from "./updateMessage";
 
 @Injectable({
   providedIn: 'root'
@@ -71,10 +71,12 @@ export class SignalrService {
   private buildUpdateMessage(schedulerEvent: any): UpdateMessage {
     console.log("build update message")
     const draggedEvent = schedulerEvent.draggedRecords[0].data
+    const eventType = (schedulerEvent.type == "eventdragstart") ? EventType.Lock : EventType.Release
     console.log(draggedEvent)
     const payload = {
       ConnectionId: this.hubConnection.connectionId,
       EventId: draggedEvent.id,
+      EventType: eventType,
       StartAt: draggedEvent.startDate,
       DateTime: new Date()
     }
@@ -102,10 +104,13 @@ export class SignalrService {
     this.hubConnection.on("newUserConnected", _ => {
       console.log("new user connected")
     })
-    this.hubConnection.on("updateReceived", (data: UpdateMessage) => {
+    this.hubConnection.on("updateReceived", (update: UpdateMessage) => {
       console.log("update received from Hub")
-      console.log(data)
-      this.updateReceived.emit(data)
+      console.log(update)
+      if (update.ConnectionId == this.hubConnection.connectionId) {
+        return
+      }
+      this.updateReceived.emit(update)
     })
   }
 }
